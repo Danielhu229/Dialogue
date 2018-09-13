@@ -16,17 +16,22 @@ namespace Dialogue {
             public string portName;
         }
 
-        public void AnswerQuestion(int index) {
+        public void AnswerQuestion(int index)
+        {
             NodePort port = null;
-            if (answers.Count == 0) {
+            if (answers.Count == 0)
+            {
                 port = GetOutputPort("output");
-            } else {
+            }
+            else
+            {
                 if (answers.Count <= index) return;
                 port = GetOutputPort(answers[index].portName);
             }
 
             if (port == null) return;
-            for (int i = 0; i < port.ConnectionCount; i++) {
+            for (int i = 0; i < port.ConnectionCount; i++)
+            {
                 NodePort connection = port.GetConnection(i);
                 (connection.node as DialogueBaseNode).Trigger();
             }
